@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({BusinessException.class})
-    protected ResponseEntity<?> handleConflict(BusinessException e) {
+    public ResponseEntity<?> handleConflict(BusinessException e) {
         log.error("RuntimeException", e);
         return ResponseEntity
             .ok()
