@@ -1,5 +1,6 @@
 package com.callmepeace.lockorrock.common;
 
+
 public enum MemberPersonalityVerb {
 
     AND("(으)로 뽑았고,"),

@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @Table(name = "tb_member")
 @NoArgsConstructor
