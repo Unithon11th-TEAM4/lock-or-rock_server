@@ -60,12 +60,7 @@ public class QuestionService {
         memberEntity.setMemberPersonality3(memberPersonality3);
         memberEntity.setMemberPersonality4(memberPersonality4);
         memberEntity.setMemberPersonality5(memberPersonality5);
-//                .memberPersonality1(memberPersonality1)
-//                .memberPersonality1(memberPersonality2)
-//                .memberPersonality1(memberPersonality3)
-//                .memberPersonality1(memberPersonality4)
-//                .memberPersonality1(memberPersonality5).build();
-
+        memberEntity.resetLikeCount();
         MemberEntity savedMemberEntity = memberRepository.save(memberEntity);
 
         MemberPersonalityDto personality1 = new MemberPersonalityDto(
@@ -82,7 +77,7 @@ public class QuestionService {
         List<MemberPersonalityDto> personalityDtoList = new ArrayList<>(
                 Arrays.asList(personality1, personality2, personality3, personality4, personality5)
         );
-        String nickname = memberEntity.getNickname();
+        String nickname = savedMemberEntity.getNickname();
 
         return new SubmitResponseDto(
                 nickname,
