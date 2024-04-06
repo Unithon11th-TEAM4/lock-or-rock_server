@@ -1,5 +1,7 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
+import com.callmepeace.lockorrock.common.ResponseCode;
+import com.callmepeace.lockorrock.global.BusinessException;
 import com.callmepeace.lockorrock.global.MemberNotFoundException;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardDetailResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardLikeResponseDto;
@@ -66,6 +68,9 @@ public class LeaderboardService {
 
         MemberEntity memberEntity = memberRepository.findById(memberId)
             .orElseThrow(MemberNotFoundException::new);
-
+        if (memberEntity.isNotSubmitted()) {
+            throw new BusinessException(ResponseCode.MEMBER_NOT_SUBMIT_ANSWER);
+        }
+        return LeaderboardDetailResponseDto.fromEntity(memberEntity);
     }
 }

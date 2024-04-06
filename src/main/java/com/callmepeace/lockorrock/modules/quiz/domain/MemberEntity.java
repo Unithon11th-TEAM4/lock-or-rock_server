@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -49,5 +50,14 @@ public class MemberEntity {
 
     public void resetLikeCount() {
         this.likeCount = 0L;
+    }
+
+    public Boolean isNotSubmitted() {
+
+        return Objects.isNull(this.memberPersonality1)
+            || Objects.isNull(this.memberPersonality2)
+            || Objects.isNull(this.memberPersonality3)
+            || Objects.isNull(this.memberPersonality4)
+            || Objects.isNull(this.memberPersonality5);
     }
 }
