@@ -1,7 +1,7 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
+import com.callmepeace.lockorrock.modules.quiz.api.dto.AnswerDetailDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.QuestionDto;
-import com.callmepeace.lockorrock.modules.quiz.api.dto.QuestionsResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.domain.QuestionEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Collectors;
 
@@ -23,7 +22,9 @@ public class QuestionService {
 
         List<QuestionEntity> questionEntities = questionRepository.findAll();
         List<QuestionEntity> randomQuestionEntities = this.getRandomElement(questionEntities, 5);
-        List<QuestionDto> questionDtos = randomQuestionEntities.stream().map(q -> QuestionDto.fromEntityFound(q)).collect(Collectors.toList());
+        List<QuestionDto> questionDtos = randomQuestionEntities.stream().map(
+                q -> QuestionDto.fromEntityFound(q)).collect(Collectors.toList());
+
     return questionDtos;
     }
 

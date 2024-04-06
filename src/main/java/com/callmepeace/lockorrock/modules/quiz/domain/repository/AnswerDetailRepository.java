@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface AnswerDetailRepository extends JpaRepository<AnswerDetailEntity, Long> {
 
-//    Optional<AnswerEntity> findByQuestionID(Long questionId);
+//    Optional<AnswerDetailEntity> findByQuestionID(Long questionId);
 }

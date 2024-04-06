@@ -1,10 +1,13 @@
 package com.callmepeace.lockorrock.modules.quiz.api.dto;
 
+import com.callmepeace.lockorrock.modules.quiz.domain.AnswerDetailEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.QuestionEntity;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +18,15 @@ public class QuestionDto {
     private String content;
     private Long answerId;
     private String commentary;
+    private List<AnswerDetailEntity> answers;
 
     public static QuestionDto fromEntityFound(QuestionEntity questionEntity) {
         return new QuestionDto(questionEntity.getQuestionId(),
                                         questionEntity.getContent(),
                                         questionEntity.getAnswerId(),
-                                        questionEntity.getCommentary());
+                                        questionEntity.getCommentary(),
+                                        questionEntity.getAnswerDetailEntity());
+
     }
 
 }
