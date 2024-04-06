@@ -1,6 +1,7 @@
 package com.callmepeace.lockorrock.modules.quiz.api.controller;
 
 import com.callmepeace.lockorrock.common.ResponseDto;
+import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardDetailResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardLikeRequestDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardLikeResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardListResponseDto;
@@ -35,4 +36,11 @@ public class LeaderboardController {
         return ResponseDto.success(leaderboardService.sendLikeLeaderboard(leaderboardLikeRequestDto.getMemberId()));
     }
 
+    @GetMapping("/leaderboard")
+    public ResponseDto<LeaderboardDetailResponseDto> getLeaderboardDetail(
+        @RequestParam(name = "member_id") Long memberId
+    ) {
+
+        return ResponseDto.success(null);
+    }
 }

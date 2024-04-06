@@ -1,6 +1,7 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
 import com.callmepeace.lockorrock.global.MemberNotFoundException;
+import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardDetailResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardLikeResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardListResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardResponseDto;
@@ -61,4 +62,10 @@ public class LeaderboardService {
         return LeaderboardLikeResponseDto.fromEntity(savedMemberEntity);
     }
 
+    public LeaderboardDetailResponseDto getLeaderboardDetail(Long memberId) {
+
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+            .orElseThrow(MemberNotFoundException::new);
+
+    }
 }

@@ -8,9 +8,10 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class MemberPersonalityDto {
+public class LeaderboardDetailResponseDto {
 
-    private String content;
-    private String verb;
+    private Long memberId;
+    private MemberPersonalityDto memberPersonality;
+    private Long likeCount;
 
 }
