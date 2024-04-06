@@ -30,4 +30,12 @@ public class MemberEntity {
     @Builder.Default
     @Column(name = "like_count")
     private Long likeCount = 0L;
+
+    public void addLikeCount() {
+        this.likeCount += 1;
+    }
+
+    public void resetLikeCount() {
+        this.likeCount = 0L;
+    }
 }

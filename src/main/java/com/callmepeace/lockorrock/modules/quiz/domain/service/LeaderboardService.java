@@ -2,10 +2,13 @@ package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
 import com.callmepeace.lockorrock.common.ResponseCode;
 import com.callmepeace.lockorrock.global.BusinessException;
+import com.callmepeace.lockorrock.global.MemberNotFoundException;
+import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardLikeResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardListResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.domain.MemberEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.repository.MemberRepository;
+import jakarta.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +37,7 @@ public class LeaderboardService {
         List<MemberEntity> leaderboards = sortedMemberList.stream().limit(10).toList();
 
         if (myIndex == -1) {
-            throw new BusinessException(ResponseCode.MEMBER_NOT_FOUND);
+            throw new MemberNotFoundException();
         }
         MemberEntity myMemberEntity = sortedMemberList.get(myIndex);
 
@@ -48,6 +51,16 @@ public class LeaderboardService {
             .toList();
         leaderboardResponseDtoList.addAll(responseList);
         return new LeaderboardListResponseDto(leaderboardResponseDtoList);
+    }
+
+    @Transactional
+    public LeaderboardLikeResponseDto sendLikeLeaderboard(Long memberId) {
+
+        MemberEntity memberEntity = memberRepository.findById(memberId)
+            .orElseThrow(MemberNotFoundException::new);
+        memberEntity.addLikeCount();
+        MemberEntity savedMemberEntity = memberRepository.save(memberEntity);
+        return LeaderboardLikeResponseDto.fromEntity(savedMemberEntity);
     }
 
 }
