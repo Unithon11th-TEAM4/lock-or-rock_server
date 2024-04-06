@@ -11,7 +11,7 @@ import lombok.Data;
 public class LeaderboardDetailResponseDto {
 
     private Long memberId;
-//    private MemberPersonalityResponseDto memberPersonality;
+    private MemberPersonalityDto memberPersonality;
     private Long likeCount;
 
 }
