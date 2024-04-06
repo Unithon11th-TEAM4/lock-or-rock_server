@@ -88,7 +88,7 @@ public class QuestionService {
 
     public String getAnswerContent(Long answerId) {
         AnswerDetailEntity answerDetailEntity = answerDetailRepository.findById(answerId).get();
-        return answerDetailEntity.getContent();
+        return answerDetailEntity.getPersonality();
     }
 
     public List<QuestionEntity> getRandomElement(List<QuestionEntity> questionEntity, int totalItems)
