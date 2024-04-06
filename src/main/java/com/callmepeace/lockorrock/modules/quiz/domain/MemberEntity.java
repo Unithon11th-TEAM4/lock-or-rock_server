@@ -24,8 +24,20 @@ public class MemberEntity {
 
     private String nickname;
 
-    @Column(name = "member_personality")
-    private String memberPersonality;
+    @Column(name = "member_personality1")
+    private String memberPersonality1;
+
+    @Column(name = "member_personality2")
+    private String memberPersonality2;
+
+    @Column(name = "member_personality3")
+    private String memberPersonality3;
+
+    @Column(name = "member_personality4")
+    private String memberPersonality4;
+
+    @Column(name = "member_personality5")
+    private String memberPersonality5;
 
     @Builder.Default
     @Column(name = "like_count")
