@@ -7,12 +7,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "tb_member")
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class MemberEntity {
 

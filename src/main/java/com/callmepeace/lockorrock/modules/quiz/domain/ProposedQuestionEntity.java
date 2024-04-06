@@ -10,12 +10,10 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "tb_proposed_question")
 @NoArgsConstructor
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class ProposedQuestionEntity {
 
