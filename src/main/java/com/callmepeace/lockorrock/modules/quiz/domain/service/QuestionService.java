@@ -18,10 +18,16 @@ public class QuestionService {
 
     private final QuestionRepository questionRepository;
 
+    private static Long finalQuestionId = 4L;
+
     public List<QuestionDto> getQuestions() {
 
         List<QuestionEntity> questionEntities = questionRepository.findAll();
-        List<QuestionEntity> randomQuestionEntities = this.getRandomElement(questionEntities, 5);
+        List<QuestionEntity> randomQuestionEntities = this.getRandomElement(questionEntities, 4);
+
+        QuestionEntity finalQuestionEntity = questionRepository.findByQuestionId(finalQuestionId);
+        randomQuestionEntities.add(finalQuestionEntity);
+
         List<QuestionDto> questionDtos = randomQuestionEntities.stream().map(
                 q -> QuestionDto.fromEntityFound(q)).collect(Collectors.toList());
 
