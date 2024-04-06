@@ -1,6 +1,5 @@
 package com.callmepeace.lockorrock.modules.quiz.api.dto;
 
-import com.callmepeace.lockorrock.modules.quiz.domain.AnswerDetailEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.QuestionEntity;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -13,7 +12,7 @@ import java.util.stream.Collectors;
 @Data
 @AllArgsConstructor
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class QuestionDto {
+public class QuestionResponseDto {
 
     private Long questionId;
     private String content;
@@ -21,8 +20,8 @@ public class QuestionDto {
     private String commentary;
     private List<AnswerDetailDto> answers;
 
-    public static QuestionDto fromEntityFound(QuestionEntity questionEntity) {
-        return new QuestionDto(questionEntity.getQuestionId(),
+    public static QuestionResponseDto fromEntityFound(QuestionEntity questionEntity) {
+        return new QuestionResponseDto(questionEntity.getQuestionId(),
                                         questionEntity.getContent(),
                                         questionEntity.getAnswerId(),
                                         questionEntity.getCommentary(),
