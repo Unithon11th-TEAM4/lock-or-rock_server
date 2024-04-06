@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @AllArgsConstructor
@@ -18,14 +19,16 @@ public class QuestionDto {
     private String content;
     private Long answerId;
     private String commentary;
-    private List<AnswerDetailEntity> answers;
+    private List<AnswerDetailDto> answers;
 
     public static QuestionDto fromEntityFound(QuestionEntity questionEntity) {
         return new QuestionDto(questionEntity.getQuestionId(),
                                         questionEntity.getContent(),
                                         questionEntity.getAnswerId(),
                                         questionEntity.getCommentary(),
-                                        questionEntity.getAnswerDetailEntity());
+                                        questionEntity.getAnswerDetailEntity().stream().map(
+                                                a -> AnswerDetailDto.fromEntityFound(a)
+                                        ).collect(Collectors.toList()));
 
     }
 

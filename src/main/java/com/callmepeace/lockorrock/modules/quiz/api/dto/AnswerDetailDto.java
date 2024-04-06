@@ -14,13 +14,11 @@ public class AnswerDetailDto {
     private Long answerId;
     private String content;
     private String url;
-    private String personality;
 
     public static AnswerDetailDto fromEntityFound(AnswerDetailEntity answerDetailEntity) {
         return new AnswerDetailDto(answerDetailEntity.getAnswerId(),
                 answerDetailEntity.getContent(),
-                answerDetailEntity.getUrl(),
-                answerDetailEntity.getPersonality());
+                answerDetailEntity.getUrl());
     }
 
 }
