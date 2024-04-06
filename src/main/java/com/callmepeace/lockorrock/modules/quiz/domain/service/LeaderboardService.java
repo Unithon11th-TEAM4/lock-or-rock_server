@@ -1,5 +1,7 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
+import com.callmepeace.lockorrock.common.ResponseCode;
+import com.callmepeace.lockorrock.global.BusinessException;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardListResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.LeaderboardResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.domain.MemberEntity;
@@ -30,6 +32,10 @@ public class LeaderboardService {
             .findFirst()
             .orElse(-1);
         List<MemberEntity> leaderboards = sortedMemberList.stream().limit(10).toList();
+
+        if (myIndex == -1) {
+            throw new BusinessException(ResponseCode.MEMBER_NOT_FOUND);
+        }
         MemberEntity myMemberEntity = sortedMemberList.get(myIndex);
 
         ArrayList<LeaderboardResponseDto> leaderboardResponseDtoList = new ArrayList<>();
