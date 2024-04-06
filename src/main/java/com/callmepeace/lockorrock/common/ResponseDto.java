@@ -16,10 +16,11 @@ public class ResponseDto<T> {
     }
 
     public static<T> ResponseDto<T> success(T data) {
-        return new ResponseDto<>(0, "OK", data);
+        ResponseCode ok = ResponseCode.OK;
+        return new ResponseDto<>(ok.getCode(), ok.getMessage(), data);
     }
 
-    public static <T> ResponseDto<T> failure(T data) {
-        return new ResponseDto<>(10, "FAILURE", data);
+    public static <T> ResponseDto<T> failure(ResponseCode code, T data) {
+        return new ResponseDto<>(code.getCode(), code.getMessage(), data);
     }
 }
