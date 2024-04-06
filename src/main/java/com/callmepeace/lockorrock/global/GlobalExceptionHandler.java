@@ -47,7 +47,16 @@ public class GlobalExceptionHandler {
         NoResourceFoundException.class
     })
     public ResponseEntity<?> handleNotFoundException(Exception e) {
-        return ResponseEntity.notFound().build();
+        if (e instanceof NoHandlerFoundException) {
+            String requestURL = ((NoHandlerFoundException) e).getRequestURL();
+            return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(ResponseDto.failure(ResponseCode.NOT_FOUND, requestURL));
+        }
+        String resourcePath = ((NoResourceFoundException) e).getResourcePath();
+        return ResponseEntity
+            .status(HttpStatus.NOT_FOUND)
+            .body(ResponseDto.failure(ResponseCode.NOT_FOUND, resourcePath));
     }
 
     @ExceptionHandler(HttpMediaTypeException.class)
