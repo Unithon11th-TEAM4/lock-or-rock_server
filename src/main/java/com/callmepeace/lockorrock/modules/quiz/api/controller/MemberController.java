@@ -4,6 +4,7 @@ import com.callmepeace.lockorrock.common.ResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.MemberRequestDto;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.MemberResponseDto;
 import com.callmepeace.lockorrock.modules.quiz.domain.service.MemberService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +19,7 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/member")
-    public ResponseDto<MemberResponseDto> getOrRegisterMember(@RequestBody MemberRequestDto memberRequestDto) {
+    public ResponseDto<MemberResponseDto> getOrRegisterMember(@RequestBody @Valid MemberRequestDto memberRequestDto) {
 
         return ResponseDto.success(memberService.getOrRegisterMember(memberRequestDto));
     }

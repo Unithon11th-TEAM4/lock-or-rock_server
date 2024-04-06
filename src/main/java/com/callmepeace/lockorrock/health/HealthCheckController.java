@@ -1,5 +1,6 @@
 package com.callmepeace.lockorrock.health;
 
+import com.callmepeace.lockorrock.common.ResponseCode;
 import com.callmepeace.lockorrock.common.ResponseDto;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
