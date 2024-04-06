@@ -1,0 +1,27 @@
+server:
+  # port: 8080
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: lockorrock
+  sql:
+    init:
+      mode: always
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://lock-or-rock.cpigg4oyah30.ap-northeast-2.rds.amazonaws.com:3306/lock_or_rock?serverTimezone=UTC&characterEncoding=UTF-8
+    username:
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
