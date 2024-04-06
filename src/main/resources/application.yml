@@ -15,8 +15,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://lock-or-rock.cpigg4oyah30.ap-northeast-2.rds.amazonaws.com:3306/lock_or_rock?serverTimezone=UTC&characterEncoding=UTF-8
-    username:
-    password:
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
 
   jpa:
     hibernate:
