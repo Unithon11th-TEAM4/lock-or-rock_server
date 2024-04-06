@@ -13,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 @Slf4j
 @RestControllerAdvice
@@ -42,7 +43,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({
-        NoHandlerFoundException.class
+        NoHandlerFoundException.class,
+        NoResourceFoundException.class
     })
     public ResponseEntity<?> handleNotFoundException(Exception e) {
         return ResponseEntity.notFound().build();
@@ -63,7 +65,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler({BusinessException.class})
-    protected ResponseEntity<?> handleConflict(BusinessException e) {
+    public ResponseEntity<?> handleConflict(BusinessException e) {
         log.error("RuntimeException", e);
         return ResponseEntity
             .ok()
