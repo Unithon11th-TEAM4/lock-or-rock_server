@@ -74,16 +74,11 @@ public class QuestionService {
                 Arrays.asList(personality1, personality2, personality3, personality4, personality5)
         );
 
-        return new LeaderboardDetailResponseDto(
-                memberEntity.getMemberId(),
-                personalityDtoList,
-                memberEntity.getLikeCount()
+        return new SubmitResponseDto(
+                nickname,
+                personalityDtoList
         );
 
-
-        MemberResponseDto memberResponseDto = MemberResponseDto.fromNewEntity(savedMemberEntity);
-
-        mem
     }
 
     public String getAnswerContent(Long answerId) {
