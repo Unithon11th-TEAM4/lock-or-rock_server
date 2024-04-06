@@ -1,8 +1,6 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
 import com.callmepeace.lockorrock.common.MemberPersonalityVerb;
-import com.callmepeace.lockorrock.common.ResponseCode;
-import com.callmepeace.lockorrock.global.BusinessException;
 import com.callmepeace.lockorrock.global.MemberNotFoundException;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.*;
 import com.callmepeace.lockorrock.modules.quiz.domain.AnswerDetailEntity;
@@ -89,7 +87,8 @@ public class QuestionService {
     }
 
     public String getAnswerContent(Long answerId) {
-        AnswerDetailEntity answerDetailEntity = answerDetailRepository.findById(answerId).get();
+        AnswerDetailEntity answerDetailEntity = answerDetailRepository.findById(answerId)
+                .orElseThrow(IllegalArgumentException::new);
         return answerDetailEntity.getPersonality();
     }
 
