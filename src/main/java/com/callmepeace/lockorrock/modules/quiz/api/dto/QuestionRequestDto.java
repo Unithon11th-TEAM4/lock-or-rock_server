@@ -11,9 +11,7 @@ import java.util.List;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class QuestionRequestDto {
 
-    @NotEmpty
     private Long memberId;
 
-    @NotEmpty
     private List<AnswerRequestDto> answers;
 }

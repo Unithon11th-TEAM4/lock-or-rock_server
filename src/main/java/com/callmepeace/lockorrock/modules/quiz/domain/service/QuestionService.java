@@ -1,6 +1,9 @@
 package com.callmepeace.lockorrock.modules.quiz.domain.service;
 
 import com.callmepeace.lockorrock.common.MemberPersonalityVerb;
+import com.callmepeace.lockorrock.common.ResponseCode;
+import com.callmepeace.lockorrock.global.BusinessException;
+import com.callmepeace.lockorrock.global.MemberNotFoundException;
 import com.callmepeace.lockorrock.modules.quiz.api.dto.*;
 import com.callmepeace.lockorrock.modules.quiz.domain.AnswerDetailEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.MemberEntity;
@@ -8,6 +11,7 @@ import com.callmepeace.lockorrock.modules.quiz.domain.QuestionEntity;
 import com.callmepeace.lockorrock.modules.quiz.domain.repository.AnswerDetailRepository;
 import com.callmepeace.lockorrock.modules.quiz.domain.repository.MemberRepository;
 import com.callmepeace.lockorrock.modules.quiz.domain.repository.QuestionRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -38,11 +42,10 @@ public class QuestionService {
     return questionDtos;
     }
 
+    @Transactional
     public SubmitResponseDto setQuestions(QuestionRequestDto questionRequestDto) {
 
-        MemberEntity memberEntity = memberRepository.findById(questionRequestDto.getMemberId()).get();
         List<AnswerRequestDto> answerRequestDtos = questionRequestDto.getAnswers();
-        String nickname = memberEntity.getNickname();
 
         String memberPersonality1 = this.getAnswerContent(answerRequestDtos.get(0).getAnswerId());
         String memberPersonality2 = this.getAnswerContent(answerRequestDtos.get(1).getAnswerId());
@@ -50,12 +53,18 @@ public class QuestionService {
         String memberPersonality4 = this.getAnswerContent(answerRequestDtos.get(3).getAnswerId());
         String memberPersonality5 = this.getAnswerContent(answerRequestDtos.get(4).getAnswerId());
 
-        memberEntity = MemberEntity.builder()
-                .memberPersonality1(memberPersonality1)
-                .memberPersonality1(memberPersonality2)
-                .memberPersonality1(memberPersonality3)
-                .memberPersonality1(memberPersonality4)
-                .memberPersonality1(memberPersonality5).build();
+        MemberEntity memberEntity = memberRepository.findById(questionRequestDto.getMemberId())
+                .orElseThrow(MemberNotFoundException::new);
+        memberEntity.setMemberPersonality1(memberPersonality1);
+        memberEntity.setMemberPersonality2(memberPersonality2);
+        memberEntity.setMemberPersonality3(memberPersonality3);
+        memberEntity.setMemberPersonality4(memberPersonality4);
+        memberEntity.setMemberPersonality5(memberPersonality5);
+//                .memberPersonality1(memberPersonality1)
+//                .memberPersonality1(memberPersonality2)
+//                .memberPersonality1(memberPersonality3)
+//                .memberPersonality1(memberPersonality4)
+//                .memberPersonality1(memberPersonality5).build();
 
         MemberEntity savedMemberEntity = memberRepository.save(memberEntity);
 
@@ -73,6 +82,7 @@ public class QuestionService {
         List<MemberPersonalityDto> personalityDtoList = new ArrayList<>(
                 Arrays.asList(personality1, personality2, personality3, personality4, personality5)
         );
+        String nickname = memberEntity.getNickname();
 
         return new SubmitResponseDto(
                 nickname,
