@@ -41,6 +41,6 @@ public class LeaderboardController {
         @RequestParam(name = "member_id") Long memberId
     ) {
 
-        return ResponseDto.success(null);
+        return ResponseDto.success(leaderboardService.getLeaderboardDetail(memberId));
     }
 }

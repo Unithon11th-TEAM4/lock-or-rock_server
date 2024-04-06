@@ -1,6 +1,8 @@
 package com.callmepeace.lockorrock.common;
 
+import lombok.Getter;
 
+@Getter
 public enum MemberPersonalityVerb {
 
     AND("(으)로 뽑았고,"),
