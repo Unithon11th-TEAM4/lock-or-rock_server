@@ -30,7 +30,9 @@ public class QuestionService {
 
     public List<QuestionResponseDto> getQuestions() {
 
-        List<QuestionEntity> questionEntities = questionRepository.findAll();
+        List<QuestionEntity> questionEntities = questionRepository.findAll().stream()
+                .filter(q -> q.getQuestionId() != finalQuestionId)
+                .collect(Collectors.toList());
         List<QuestionEntity> randomQuestionEntities = this.getRandomElement(questionEntities, 4);
 
         QuestionEntity finalQuestionEntity = questionRepository.findByQuestionId(finalQuestionId);
