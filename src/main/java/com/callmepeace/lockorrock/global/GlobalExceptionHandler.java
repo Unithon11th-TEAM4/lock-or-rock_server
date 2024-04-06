@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
         MethodArgumentNotValidException.class,
         IllegalArgumentException.class
     })
-    protected ResponseEntity<?> handleBindException(Exception e) {
+    public ResponseEntity<?> handleBindException(Exception e) {
         log.error("Bad request exception occurred: {}", e.getMessage(), e);
         log.error("Stack Trace: {}", e.getStackTrace(), e);
 
